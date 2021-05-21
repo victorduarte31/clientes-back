@@ -5,6 +5,8 @@ import br.victor.clientes.rest.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
@@ -13,5 +15,9 @@ public class UsuarioService {
 
     public void salvar(Usuario usuario) {
         usuarioRepository.save(usuario);
+    }
+
+    public List<Usuario> buscarTodosUsuarios() {
+        return usuarioRepository.findAll();
     }
 }

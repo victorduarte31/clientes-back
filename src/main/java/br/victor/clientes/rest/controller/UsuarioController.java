@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -14,6 +15,11 @@ import javax.validation.Valid;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+
+    @GetMapping
+    public List<Usuario> buscarTodosUsuarios() {
+        return usuarioService.buscarTodosUsuarios();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

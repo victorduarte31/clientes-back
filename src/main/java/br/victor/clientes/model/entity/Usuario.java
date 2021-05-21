@@ -28,19 +28,14 @@ public class Usuario implements UserDetails {
 
     @Column(name = "senha")
     @NotEmpty(message = "Senha é de preenchimento obrigatório!")
-    private String userPassword;
+    private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Perfil> perfils = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.perfils;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.userPassword;
     }
 
     @Override
