@@ -1,6 +1,7 @@
 package br.victor.clientes.configuration.security;
 
 import br.victor.clientes.rest.repository.UsuarioRepository;
+import br.victor.clientes.rest.service.security.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

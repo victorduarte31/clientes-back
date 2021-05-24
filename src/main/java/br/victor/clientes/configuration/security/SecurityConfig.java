@@ -1,7 +1,8 @@
 package br.victor.clientes.configuration.security;
 
-import br.victor.clientes.configuration.security.authentication.AutenticacaoService;
 import br.victor.clientes.rest.repository.UsuarioRepository;
+import br.victor.clientes.rest.service.security.AutenticacaoService;
+import br.victor.clientes.rest.service.security.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,8 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers("/api/usuarios/**").permitAll()
-                .antMatchers("/api/clientes/**", "/api/servicos-prestados/**").authenticated()
-                .anyRequest().denyAll()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .cors()

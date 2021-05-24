@@ -3,8 +3,10 @@ package br.victor.clientes.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -44,6 +46,11 @@ public class Usuario implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return new BCryptPasswordEncoder().encode(this.password);
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -61,5 +68,9 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UsernamePasswordAuthenticationToken converter() {
+        return new UsernamePasswordAuthenticationToken(userName, password);
     }
 }

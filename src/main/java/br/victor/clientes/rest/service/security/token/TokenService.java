@@ -1,4 +1,4 @@
-package br.victor.clientes.configuration.security;
+package br.victor.clientes.rest.service.security.token;
 
 import br.victor.clientes.model.entity.Usuario;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +21,8 @@ public class TokenService {
 
         return Jwts.builder()
                 .setIssuer("Api Clientes")
-                .setSubject(usuario.getId().toString())
+                .setSubject(usuario.getUsername())
+                .setId(usuario.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + Long.parseLong("1800000")))
                 .signWith(secretKey)
